@@ -30,46 +30,14 @@ $this->title = 'Главная';
 			<aside class="left-sidebar2">
 				<h3><span>Самые</span> рейтинговые</h3>
 				<ol class="side-list rating">
+                                    
+                                    <?php foreach($ratPosts as $cur) { ?>
 					<li>
-						<a href="">Автобоевой отряд ВЦИКа</a>
-						<span>Повесть</span>
+						<a href=""><?=$cur['title']?></a>
+						<span><?=$cur['form']?></span>
 					</li>
-					<li>
-						<a href="">Ваня</a>
-						<span>Повесть</span>
-					</li>
-					<li>
-						<a href="">Перекрёсток</a>
-						<span>Рассказ</span>
-					</li>
-					<li>
-						<a href="">Брошенный</a>
-						<span>Рассказ</span>
-					</li>
-					<li>
-						<a href="">Мстислав</a>
-						<span>Повесть</span>
-					</li>
-					<li>
-						<a href="">Самолёт</a>
-						<span>Рассказ</span>
-					</li>
-					<li>
-						<a href="">Апланта</a>
-						<span>Роман</span>
-					</li>
-					<li>
-						<a href="">Часы</a>
-						<span>Повесть</span>
-					</li>
-					<li>
-						<a href="">Отец Владимир</a>
-						<span>Рассказ</span>
-					</li>
-					<li>
-						<a href="">Ботинок</a>
-						<span>Повесть</span>
-					</li>
+                                    <?php } ?>
+                                        
 				</ol>
 			</aside>
 			<aside class="left-sidebar3">

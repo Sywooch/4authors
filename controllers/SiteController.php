@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Users;
+use app\models\Posts;
 
 class SiteController extends GrandController
 {
@@ -62,7 +63,12 @@ class SiteController extends GrandController
     
     public function actionIndex()
     {   
+        /* Get Users */
         $users = Users::GetUsers();
-        return $this->render('index', compact('users'));
+        
+        /* Get Top Posts */
+        $ratPosts = Posts::getPostsByRating(); 
+        
+        return $this->render('index', compact('users', 'ratPosts'));
     }
 }
