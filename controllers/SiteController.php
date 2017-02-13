@@ -10,6 +10,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Users;
 use app\models\Posts;
+use app\models\Articles;
 
 class SiteController extends GrandController
 {
@@ -69,6 +70,25 @@ class SiteController extends GrandController
         /* Get Top Posts */
         $ratPosts = Posts::getPostsByRating(); 
         
-        return $this->render('index', compact('users', 'ratPosts'));
+        /* Get Most Viewed Posts */
+        $viePosts = Posts::getPostsByViews(); 
+        
+        /* Get Most Viewed Articles */
+        $articles = Articles::getArticlesByViews();
+        
+        /* Get Posts */
+        $posts = Posts::getPostsByGenre();
+        
+        $arrayLeft = $posts['arrayLeft'];
+        $arrayRight = $posts['arrayRight'];
+        
+        return $this->render('index', compact(
+                'users', 
+                'ratPosts', 
+                'viePosts', 
+                'articles', 
+                'arrayLeft', 
+                'arrayRight'
+        ));
     }
 }

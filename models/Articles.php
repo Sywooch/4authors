@@ -10,19 +10,20 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 /**
- * Description of Forms
+ * Description of Articles
  *
- * @author Freyyr
+ * @author Император
  */
-class Forms extends ActiveRecord{
+class Articles extends ActiveRecord{
     
-    public static function tableName() {
-        return 'forms';
+    public static function tableName()
+    {
+        return 'articles';
     }
     
-    public function getPosts() 
+    public function GetArticlesByViews()
     {
-        return $this->hasMany(Posts::className(), ['form_id' => 'id']);
+        return Articles::find()->orderBy('views DESC')->limit(5)->all();
     }
     
 }
