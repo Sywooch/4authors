@@ -21,7 +21,8 @@ class AppAsset extends AssetBundle
         'libs/bootstrap/css/bootstrap.min.css',
         'libs/bootstrap/css/bootstrap-theme.min.css',
         'css/main.css',
-        'css/media.css'
+        'css/media.css',
+        'libs/font-awesome-4.7.0/css/font-awesome.min.css'
     ];
     public $js = [
         'libs/bootstrap/js/bootstrap.min.js',

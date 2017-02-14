@@ -79,16 +79,12 @@ class SiteController extends GrandController
         /* Get Posts */
         $posts = Posts::getPostsByGenre();
         
-        $arrayLeft = $posts['arrayLeft'];
-        $arrayRight = $posts['arrayRight'];
-        
         return $this->render('index', compact(
                 'users', 
                 'ratPosts', 
                 'viePosts', 
                 'articles', 
-                'arrayLeft', 
-                'arrayRight'
+                'posts'
         ));
     }
 }

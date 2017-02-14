@@ -70,8 +70,7 @@ class Posts extends ActiveRecord {
         
         $genres = Genres::getGenresByAlph();
         
-        foreach ($genres as $key => $value) {
-            if(($key % 2) == 0) {
+        foreach ($genres as $value) {
                 $posts = $value->getPosts()->limit(3)->all();
                 foreach($posts as $cur) {
                     $form = $cur->forms->name;
@@ -80,37 +79,16 @@ class Posts extends ActiveRecord {
                         'form'  => $form 
                     ];
                 }
-                $arrayLeft[] = [
+                $arrayBig[] = [
                     'name' => $value['name'], 
                     'posts' => $array
                 ];
                 $array = [];
-            }
-            else {
-                $posts = $value->getPosts()->limit(3)->all();
-                foreach($posts as $cur) {
-                    $form = $cur->forms->name;
-                    $array[] = [
-                        'title' => $cur['title'],
-                        'form'  => $form 
-                    ];
-                }
-                $arrayRight[] = [
-                    'name' => $value['name'], 
-                    'posts' => $array
-                ];
-                $array = [];
-            }
         }
         
-        $data = [
-            'arrayLeft'  => $arrayLeft, 
-            'arrayRight' => $arrayRight
-        ];
+        Yii::$app->cache->set($postsByGenre, $arrayBig, 2000);
         
-        Yii::$app->cache->set($postsByGenre, $data, 2000);
-        
-        return $data;
+        return $arrayBig;
         
         } else {
             return $data;

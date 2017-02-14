@@ -68,45 +68,10 @@ $this->title = 'Главная';
 			<div class="main-content">
 			<h1>Произведения по жанрам</h1>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<ul class="genre-list">
                                                     
-                                                    <?php foreach ($arrayLeft as $value) {?>
-							<li>
-								<h2><?=$value['name']?></h2>
-								<ul class="product-list">
-                                                                    
-                                                                    <?php if(!empty($value['posts'])) {
-                                                                        foreach ($value['posts'] as $cur) { 
-                                                                            ?>
-                                                                        
-                                                                        <Li>
-                                                                            <a href=""><?=$cur['title']?></a>
-                                                                            <span><?=$cur['form']?></span>
-									</Li>
-                                                                        
-                                                                        <?php  } ?>
-                                                                        
-                                                                            <Li class="more">
-										<a href="">Еще...</a>
-                                                                            </Li>
-                                                                        
-                                                                        <?php } else { ?>
-                                                                        
-                                                                        <span>В катерогии произведений нет</span>
-                                                                        
-                                                                    <?php   } ?>
-                                                                        
-								</ul>
-							</li>
-                                                    <?php } ?>
-                                                        
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<ul class="genre-list">
-                                                    
-                                                    <?php foreach ($arrayRight as $value) {?>
+                                                    <?php foreach ($posts as $value) {?>
 							<li>
 								<h2><?=$value['name']?></h2>
 								<ul class="product-list">

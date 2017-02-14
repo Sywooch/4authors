@@ -7,6 +7,7 @@ $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defauleRoute' => 'site/index',
     'controllerNamespace' => 'app\commands',
     'components' => [
         'cache' => [
