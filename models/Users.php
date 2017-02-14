@@ -17,4 +17,9 @@ class Users extends ActiveRecord {
         $us_array = Users::find()->orderBy('rating DESC')->limit('4')->all();
         return $us_array;
     }
+    
+    public function getPosts()
+    {
+        return $this->hasMany(Posts::className(), ['user_id' => 'id']);
+    }
 }

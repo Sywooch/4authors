@@ -31,6 +31,11 @@ class Posts extends ActiveRecord {
       return $this->hasOne(Genres::className(), ['id' => 'form_id']);  
     }
     
+    public function getAuthors()
+    {
+      return $this->hasOne(Users::className(), ['id' => 'user_id']);  
+    }
+    
     public function getPostsByRating()
     {
         $posts = Posts::find()->orderBy('rating DESC')->limit(10)->all();
@@ -75,12 +80,13 @@ class Posts extends ActiveRecord {
                 foreach($posts as $cur) {
                     $form = $cur->forms->name;
                     $array[] = [
+                        'id'    => $cur['id'],
                         'title' => $cur['title'],
                         'form'  => $form 
                     ];
                 }
                 $arrayBig[] = [
-                    'name' => $value['name'], 
+                    'name'  => $value['name'], 
                     'posts' => $array
                 ];
                 $array = [];

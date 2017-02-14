@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-$this->title = 'Главная';
+$this->title = $post->title.' - 4authors.ru';
 
 ?>
 
@@ -66,42 +66,26 @@ $this->title = 'Главная';
 		</div>
 		<div class="main-col col-md-8">
 			<div class="main-content">
-			<h1>Произведения по жанрам</h1>
+			<h1><?=$post->title?></h1>
 				<div class="row">
 					<div class="col-md-12">
-						<ul class="genre-list">
-                                                    
-                                                    <?php foreach ($posts as $value) {?>
-							<li>
-								<h2><?=$value['name']?></h2>
-								<ul class="product-list">
-                                                                    
-                                                                    <?php if(!empty($value['posts'])) {
-                                                                        foreach ($value['posts'] as $cur) { 
-                                                                            ?>
-                                                                        
-                                                                        <Li>
-                                                                            <a href="<?= \yii\helpers\Url::to(['post', 'id' => $cur['id']])?>"><?=$cur['title']?></a>
-                                                                            <span><?=$cur['form']?></span>
-									</Li>
-                                                                        
-                                                                        <?php  } ?>
-                                                                        
-                                                                            <Li class="more">
-										<a href="">Еще...</a>
-                                                                            </Li>
-                                                                        
-                                                                        <?php } else { ?>
-                                                                        
-                                                                        <span>В катерогии произведений нет</span>
-                                                                        
-                                                                    <?php   } ?>
-                                                                        
-								</ul>
-							</li>
-                                                    <?php } ?>
-                                                        
-						</ul>
+						<div class="post-img">
+							<img src="/img_storage/588d7f0703cae.jpg" alt="Ваня" />
+						</div>
+						<div class="text-body">
+                                                    <?=$post->text?>
+						</div>
+						<div class="date-author">
+							<span class="big-span"><a href="">@<?=$user_name?> /</a> <?=$user_real_name?>, <span class="date">2013 год</span></span>
+						</div>
+						<div class="rating-date clearfix">
+							<div class="rating">
+								Рейтинг: <span><?=$post->rating?></span>
+							</div>
+							<div class="date">
+								Опубликовано: <span>30.02.2013</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

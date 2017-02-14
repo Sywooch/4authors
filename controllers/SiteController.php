@@ -87,4 +87,40 @@ class SiteController extends GrandController
                 'posts'
         ));
     }
+    
+    public function actionPost()
+    {
+        /* Get Users */
+        $users = Users::GetUsers();
+        
+        /* Get Top Posts */
+        $ratPosts = Posts::getPostsByRating(); 
+        
+        /* Get Most Viewed Posts */
+        $viePosts = Posts::getPostsByViews(); 
+        
+        /* Get Most Viewed Articles */
+        $articles = Articles::getArticlesByViews();
+        
+        $id = Yii::$app->request->get('id');
+        $post = Posts::findOne($id);
+        $genre = $post->genres->name;
+        $form = $post->forms->name;
+        
+        $authors = $post->authors;
+        $user_name = $authors->name;
+        $user_real_name = $authors->real_name;
+        
+        return $this->render('post' , compact(
+                'post', 
+                'users', 
+                'ratPosts', 
+                'viePosts', 
+                'articles',
+                'genre',
+                'form',
+                'user_name',
+                'user_real_name'
+        ));
+    }
 }
