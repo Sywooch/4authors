@@ -50,6 +50,9 @@ $config = [
         
     ],
     'params' => $params,
+    'aliases' => [
+        '@img' => '/img_storage'
+    ]
 ];
 
 if (YII_ENV_DEV) {

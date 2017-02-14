@@ -66,11 +66,12 @@ $this->title = $post->title.' - 4authors.ru';
 		</div>
 		<div class="main-col col-md-8">
 			<div class="main-content">
-			<h1><?=$post->title?></h1>
+			<h1 class="post-title"><?=$post->title?></h1>
+                        <span class="post-genres"><?=$form?> в жанре: <a href=""><?=$genre?></a></span>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="post-img">
-							<img src="/img_storage/588d7f0703cae.jpg" alt="Ваня" />
+							<img src="<?=Yii::getAlias('@img')?>/<?=$post['img']?>" alt="Ваня" />
 						</div>
 						<div class="text-body">
                                                     <?=$post->text?>
@@ -83,11 +84,17 @@ $this->title = $post->title.' - 4authors.ru';
 								Рейтинг: <span><?=$post->rating?></span>
 							</div>
 							<div class="date">
-								Опубликовано: <span>30.02.2013</span>
+								Опубликовано: <span><?=$post['date']?></span>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+                        <div class="social-share">
+				Тут будут кнопки поделиться в соц.сетях
+			</div>
+			<div class="post-comments">
+				А тут каменты)00
 			</div>
 		</div>
 	</div>	
