@@ -43,6 +43,7 @@ class Posts extends ActiveRecord {
         foreach($posts as $value) {
             $form = $value->forms->name;
             $array[] = [
+                'id'    => $value['id'],
                 'title' => $value['title'], 
                 'form'  => $form
             ];
@@ -58,6 +59,7 @@ class Posts extends ActiveRecord {
         foreach($posts as $value) {
             $form = $value->forms->name;
             $array[] = [
+                'id'    => $value['id'],
                 'title' => $value['title'], 
                 'form'  => $form
             ];
@@ -86,8 +88,9 @@ class Posts extends ActiveRecord {
                     ];
                 }
                 $arrayBig[] = [
-                    'name'  => $value['name'], 
-                    'posts' => $array
+                    'gen_id' => $value['id'],
+                    'name'   => $value['name'], 
+                    'posts'  => $array
                 ];
                 $array = [];
         }

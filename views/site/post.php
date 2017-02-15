@@ -13,56 +13,7 @@ $this->title = $post->title.' - 4authors.ru';
 <div class="main">
 	<div class="container">
 		<div class="left-col col-md-4">
-			<aside class="left-sidebar">
-				<h3><span>Доска</span> почёта</h3>
-				<ul class="side-list user_list">
-                                    
-                                <?php 
-                                foreach ($users as $user) { ?>
-                                    <li>
-                                        <a href=""><?=$user['name']?></a>
-                                        <span><?=$user['position']?></span>
-                                    </li>
-                               <?php  } ?>
-                              
-				</ul>
-			</aside>
-			<aside class="left-sidebar2">
-				<h3><span>Самые</span> рейтинговые</h3>
-				<ol class="side-list rating">
-                                    
-                                    <?php foreach($ratPosts as $cur) { ?>
-					<li>
-						<a href=""><?=$cur['title']?></a>
-						<span><?=$cur['form']?></span>
-					</li>
-                                    <?php } ?>
-                                        
-				</ol>
-			</aside>
-			<aside class="left-sidebar3">
-				<h3><span>Самые</span> читаемые</h3>
-				<ol class="side-list rating">
-                                    
-                                    <?php foreach($viePosts as $cur) { ?>
-					<li>
-						<a href=""><?=$cur['title']?></a>
-						<span><?=$cur['form']?></span>
-					</li>
-                                    <?php } ?>
-                                        
-				</ol>
-			</aside>
-			<aside class="left-sidebar4">
-				<h3><span>Справочник</span> писателя</h3>
-				<ul class="art-list">
-                                    
-                                    <?php foreach ($articles as $cur) {?>
-                                        <li><a href=""><?=$cur['title']?></a></li>
-                                    <?php } ?>
-                                        
-				</ul>
-			</aside>
+		    <?php require_once 'left.php';?>
 		</div>
 		<div class="main-col col-md-8">
 			<div class="main-content">
@@ -77,14 +28,14 @@ $this->title = $post->title.' - 4authors.ru';
                                                     <?=$post->text?>
 						</div>
 						<div class="date-author">
-							<span class="big-span"><a href="">@<?=$user_name?> /</a> <?=$user_real_name?>, <span class="date">2013 год</span></span>
+							<span class="big-span"><a href="">@<?=$user_name?> /</a> <?=$user_real_name?>, <span class="date"><?=Yii::$app->formatter->asDatetime($post['date'], "php:Y")?> год</span></span>
 						</div>
 						<div class="rating-date clearfix">
 							<div class="rating">
 								Рейтинг: <span><?=$post->rating?></span>
 							</div>
 							<div class="date">
-								Опубликовано: <span><?=$post['date']?></span>
+								Опубликовано: <span><?=Yii::$app->formatter->asDatetime($post['date'], "php:d.m.Y")?></span>
 							</div>
 						</div>
 					</div>

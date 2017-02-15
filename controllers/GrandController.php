@@ -7,7 +7,11 @@
  */
 
 namespace app\controllers;
+
 use yii\web\Controller;
+use app\models\Posts;
+use app\models\Users;
+use app\models\Articles;
 
 /**
  * Description of GrandController
@@ -15,5 +19,25 @@ use yii\web\Controller;
  * @author Freyyr
  */
 class GrandController extends Controller{
-    //put your code here
+    
+    public $users;
+    public $ratPosts;
+    public $viePosts;
+    public $articles;
+    
+    public function getLeftSidebar()
+    {
+        /* Get Users */
+        $this->users = Users::GetUsers();
+        
+        /* Get Top Posts */
+        $this->ratPosts = Posts::getPostsByRating(); 
+        
+        /* Get Most Viewed Posts */
+        $this->viePosts = Posts::getPostsByViews(); 
+        
+        /* Get Most Viewed Articles */
+        $this->articles = Articles::getArticlesByViews();
+    }
+    
 }

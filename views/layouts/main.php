@@ -47,7 +47,7 @@ AppAsset::register($this);
 			<div class="row">
 				<div class="col-md-12">
 					<div class="logo-container float-l">
-						<a href="" class="logo">
+						<a href="/" class="logo">
 							<span class="logo-span"></span>
 							<span class="logo-text-span">Лучшие писатели рунета!</span>
 						</a>

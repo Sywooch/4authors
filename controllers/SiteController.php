@@ -64,43 +64,23 @@ class SiteController extends GrandController
     
     public function actionIndex()
     {   
-        /* Get Users */
-        $users = Users::GetUsers();
-        
-        /* Get Top Posts */
-        $ratPosts = Posts::getPostsByRating(); 
-        
-        /* Get Most Viewed Posts */
-        $viePosts = Posts::getPostsByViews(); 
-        
-        /* Get Most Viewed Articles */
-        $articles = Articles::getArticlesByViews();
+        parent::getLeftSidebar();
         
         /* Get Posts */
         $posts = Posts::getPostsByGenre();
         
-        return $this->render('index', compact(
-                'users', 
-                'ratPosts', 
-                'viePosts', 
-                'articles', 
-                'posts'
-        ));
+        return $this->render('index', [
+                'users'    => $this->users, 
+                'ratPosts' => $this->ratPosts, 
+                'viePosts' => $this->viePosts, 
+                'articles' => $this->articles, 
+                'posts'    => $posts
+        ]);
     }
     
     public function actionPost()
     {
-        /* Get Users */
-        $users = Users::GetUsers();
-        
-        /* Get Top Posts */
-        $ratPosts = Posts::getPostsByRating(); 
-        
-        /* Get Most Viewed Posts */
-        $viePosts = Posts::getPostsByViews(); 
-        
-        /* Get Most Viewed Articles */
-        $articles = Articles::getArticlesByViews();
+        parent::getLeftSidebar();
         
         $id = Yii::$app->request->get('id');
         $post = Posts::findOne($id);
@@ -111,16 +91,25 @@ class SiteController extends GrandController
         $user_name = $authors->name;
         $user_real_name = $authors->real_name;
         
-        return $this->render('post' , compact(
-                'post', 
-                'users', 
-                'ratPosts', 
-                'viePosts', 
-                'articles',
-                'genre',
-                'form',
-                'user_name',
-                'user_real_name'
-        ));
+        return $this->render('post' , [
+                'post'           => $post, 
+                'users'          => $this->users, 
+                'ratPosts'       => $this->ratPosts, 
+                'viePosts'       => $this->viePosts, 
+                'articles'       => $this->articles, 
+                'genre'          => $genre,
+                'form'           => $form,
+                'user_name'      => $user_name,
+                'user_real_name' => $user_real_name
+        ]);
+    }
+    
+    public function actionGenre()
+    {
+        parent::getLeftSidebar();
+        
+        $id = Yii::$app->request->get('id');
+        
+        return $this->render('genre' ,[]);
     }
 }
