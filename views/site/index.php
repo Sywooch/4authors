@@ -12,9 +12,6 @@ $this->title = 'Главная';
 
 <div class="main">
 	<div class="container">
-		<div class="left-col col-md-4">
-                    <?php require_once 'left.php';?>
-		</div>
 		<div class="main-col col-md-8">
 			<div class="main-content">
 			<h1>Произведения по жанрам</h1>
@@ -56,6 +53,9 @@ $this->title = 'Главная';
 					</div>
 				</div>
 			</div>
+		</div>
+                <div class="left-col col-md-4">
+                    <?php require_once 'left.php';?>
 		</div>
 	</div>	
 </div>

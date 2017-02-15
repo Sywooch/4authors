@@ -12,9 +12,6 @@ $this->title = $post->title.' - 4authors.ru';
 
 <div class="main">
 	<div class="container">
-		<div class="left-col col-md-4">
-		    <?php require_once 'left.php';?>
-		</div>
 		<div class="main-col col-md-8">
 			<div class="main-content">
 			<h1 class="post-title"><?=$post->title?></h1>
@@ -47,6 +44,9 @@ $this->title = $post->title.' - 4authors.ru';
 			<div class="post-comments">
 				А тут каменты)00
 			</div>
+		</div>
+                <div class="left-col col-md-4">
+                    <?php require_once 'left.php';?>
 		</div>
 	</div>	
 </div>

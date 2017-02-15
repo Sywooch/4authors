@@ -12,9 +12,6 @@ $this->title = $genre->name.' - 4authors.ru';
 
 <div class="main">
 	<div class="container">
-		<div class="left-col col-md-4">
-		    <?php require_once 'left.php';?>
-		</div>
 		<div class="main-col col-md-8">
 			<div class="main-content">
 			<h1 class="post-title"><?=$genre->name?></h1>
@@ -48,6 +45,9 @@ $this->title = $genre->name.' - 4authors.ru';
 				А тут каменты)00
 			</div>
                     -->
+		</div>
+                <div class="left-col col-md-4">
+                    <?php require_once 'left.php';?>
 		</div>
 	</div>	
 </div>
