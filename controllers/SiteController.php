@@ -11,6 +11,7 @@ use app\models\ContactForm;
 use app\models\Users;
 use app\models\Posts;
 use app\models\Articles;
+use app\models\Genres;
 
 class SiteController extends GrandController
 {
@@ -84,7 +85,9 @@ class SiteController extends GrandController
         
         $id = Yii::$app->request->get('id');
         $post = Posts::findOne($id);
-        $genre = $post->genres->name;
+        $genre = $post->genres;
+        $genre_t = $genre->name;
+        $genre_id = $genre->id;
         $form = $post->forms->name;
         
         $authors = $post->authors;
@@ -97,7 +100,8 @@ class SiteController extends GrandController
                 'ratPosts'       => $this->ratPosts, 
                 'viePosts'       => $this->viePosts, 
                 'articles'       => $this->articles, 
-                'genre'          => $genre,
+                'genre'          => $genre_t,
+                'genre_id'       => $genre_id,
                 'form'           => $form,
                 'user_name'      => $user_name,
                 'user_real_name' => $user_real_name
@@ -110,6 +114,33 @@ class SiteController extends GrandController
         
         $id = Yii::$app->request->get('id');
         
-        return $this->render('genre' ,[]);
+        $genre = Genres::findOne($id);
+        $count = $genre->getPosts()->count();
+        $posts = $genre->posts;
+        foreach ($posts as $cur) {
+            $auth = $cur->authors;
+            $name = $auth->name;
+            $real = $auth->real_name;
+            $id_u = $auth->id;
+            $array[] = [
+                'title'  => $cur['title'],
+                'id'     => $cur['id'],
+                'img'    => $cur['img'],
+                'rating' => $cur['rating'],
+                'name'   => $name,
+                'real'   => $real,
+                'id_u'   => $id_u 
+            ];
+        }
+        
+        return $this->render('genre' ,[
+            'users'    => $this->users, 
+            'ratPosts' => $this->ratPosts, 
+            'viePosts' => $this->viePosts, 
+            'articles' => $this->articles,
+            'genre'    => $genre,
+            'count'    => $count,
+            'posts'    => $array
+        ]);
     }
 }

@@ -18,11 +18,11 @@ $this->title = $post->title.' - 4authors.ru';
 		<div class="main-col col-md-8">
 			<div class="main-content">
 			<h1 class="post-title"><?=$post->title?></h1>
-                        <span class="post-genres"><?=$form?> в жанре: <a href=""><?=$genre?></a></span>
+                        <span class="post-genres"><?=$form?> в жанре: <a href="<?= \yii\helpers\Url::to(['genre', 'id' => $genre_id])?>"><?=$genre?></a></span>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="post-img">
-							<img src="<?=Yii::getAlias('@img')?>/<?=$post['img']?>" alt="Ваня" />
+							<img src="<?=Yii::getAlias('@img')?>/<?=$post['img']?>" alt="<?=$post->title?>" />
 						</div>
 						<div class="text-body">
                                                     <?=$post->text?>
