@@ -93,6 +93,7 @@ class SiteController extends GrandController
         $authors = $post->authors;
         $user_name = $authors->name;
         $user_real_name = $authors->real_name;
+        $name_id = $authors->name_id;
         
         return $this->render('post' , [
                 'post'           => $post, 
@@ -104,7 +105,8 @@ class SiteController extends GrandController
                 'genre_id'       => $genre_id,
                 'form'           => $form,
                 'user_name'      => $user_name,
-                'user_real_name' => $user_real_name
+                'user_real_name' => $user_real_name,
+                'n_id'           => $name_id
         ]);
     }
     
@@ -121,6 +123,7 @@ class SiteController extends GrandController
             $auth = $cur->authors;
             $name = $auth->name;
             $real = $auth->real_name;
+            $n_id = $auth->name_id;
             $id_u = $auth->id;
             $array[] = [
                 'title'  => $cur['title'],
@@ -129,7 +132,8 @@ class SiteController extends GrandController
                 'rating' => $cur['rating'],
                 'name'   => $name,
                 'real'   => $real,
-                'id_u'   => $id_u 
+                'id_u'   => $id_u,
+                'n_id'   => $n_id
             ];
         }
         
@@ -141,6 +145,41 @@ class SiteController extends GrandController
             'genre'    => $genre,
             'count'    => $count,
             'posts'    => $array
+        ]);
+    }
+    
+    public function actionUser()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        
+        parent::getLeftSidebar();
+        
+        $name = Yii::$app->request->get('name');
+      
+        $user = Users::find()->where(['name_id' => $name])->one();
+        
+        $posts_count = $user->getPosts()->count();
+        
+        if($session->get('name') != $name) {
+            /* Count */
+            $count = $user->sees;
+            $user->sees = ++$count;
+            $user->save();   
+            
+            $session->set('name', $name);
+        } 
+        
+        
+        
+
+        return $this->render('user', [
+            'users'          => $this->users, 
+            'ratPosts'       => $this->ratPosts, 
+            'viePosts'       => $this->viePosts, 
+            'articles'       => $this->articles, 
+            'user'           => $user,
+            'posts_count'    => $posts_count
         ]);
     }
 }

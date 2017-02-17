@@ -24,7 +24,7 @@ $this->title = $genre->name.' - 4authors.ru';
 							<li class="post-item">
 								<div class="post-info">
 									<span class="post-title-item"><a href="<?=\yii\helpers\Url::to(['post', 'id' => $cur['id']])?>"><?=$cur['title']?></a></span>
-									<span class="post-author"><a class="post-real-name" href="<?=\yii\helpers\Url::to(['user', 'name' => $cur['name']])?>"><?=$cur['real']?></a>  <a class="post-name" href="<?=\yii\helpers\Url::to(['user', 'name' => $cur['name']])?>">@<?=$cur['name']?></a></span>
+									<span class="post-author"><a class="post-real-name" href="<?=\yii\helpers\Url::to(['user', 'name' => $cur['n_id']])?>"><?=$cur['real']?></a>  <a class="post-name" href="<?=\yii\helpers\Url::to(['user', 'name' => $cur['n_id']])?>">@<?=$cur['name']?></a></span>
 									<span class="rating">Рейтинг: <b><?=$cur['rating']?></b></span>
 								</div>
 								<div class="post-img">

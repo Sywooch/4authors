@@ -52,7 +52,8 @@ $config = [
     ],
     'params' => $params,
     'aliases' => [
-        '@img' => '/img_storage'
+        '@img' => '/img_storage',
+        '@avatar' => '/img_storage/avatar'
     ]
 ];
 

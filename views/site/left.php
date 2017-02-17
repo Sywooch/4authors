@@ -15,7 +15,7 @@
         <?php 
         foreach ($users as $user) { ?>
             <li>
-                <a href="<?=\yii\helpers\Url::to(['user', 'name' => $user['name']])?>"><?=$user['name']?></a>
+                <a href="<?=\yii\helpers\Url::to(['user', 'name' => $user['name_id']])?>"><?=$user['name']?></a>
                 <span><?=$user['position']?></span>
             </li>
        <?php  } ?>

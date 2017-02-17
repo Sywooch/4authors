@@ -25,7 +25,7 @@ $this->title = $post->title.' - 4authors.ru';
                                                     <?=$post->text?>
 						</div>
 						<div class="date-author">
-							<span class="big-span"><a href="">@<?=$user_name?> /</a> <?=$user_real_name?>, <span class="date"><?=Yii::$app->formatter->asDatetime($post['date'], "php:Y")?> год</span></span>
+							<span class="big-span"><a href="<?= \yii\helpers\Url::to(['user', 'name' => $n_id])?>">@<?=$user_name?> /</a> <?=$user_real_name?>, <span class="date"><?=Yii::$app->formatter->asDatetime($post['date'], "php:Y")?> год</span></span>
 						</div>
 						<div class="rating-date clearfix">
 							<div class="rating">

@@ -28,7 +28,7 @@ class Posts extends ActiveRecord {
     
     public function getGenres()
     {
-      return $this->hasOne(Genres::className(), ['id' => 'form_id']);  
+      return $this->hasOne(Genres::className(), ['id' => 'genre_id']);  
     }
     
     public function getAuthors()
