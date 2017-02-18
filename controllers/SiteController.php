@@ -182,4 +182,28 @@ class SiteController extends GrandController
             'posts_count'    => $posts_count
         ]);
     }
+    
+    public function actionPosts()
+    {
+        parent::getLeftSidebar();
+        
+        $id = Yii::$app->request->get('name');
+        
+        $user_info = Users::find()->where(['name_id' => $id])->one();
+        
+        $posts = Posts::find()->where(['user_id' => $user_info->id])->all();
+        
+        $count = count($posts);
+        
+        return $this->render('posts', [
+            'users'          => $this->users, 
+            'ratPosts'       => $this->ratPosts, 
+            'viePosts'       => $this->viePosts, 
+            'articles'       => $this->articles, 
+            'id'             => $id,
+            'user'           => $user_info,
+            'posts'          => $posts,
+            'count'          => $count
+        ]);
+    }
 }

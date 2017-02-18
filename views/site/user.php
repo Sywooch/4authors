@@ -57,7 +57,7 @@ $this->title = $user->name.' - 4authors.ru';
 						<div class="account-activ">
 							<span>Активность:</span>
 							<a href="">Комментарии (0)</a>
-							<a href="<?=\yii\helpers\Url::to(['posts', 'name' => $cur['n_id']])?>">Публикации (<?=$posts_count?>)</a>
+							<a href="<?=\yii\helpers\Url::to(['posts', 'name' => $user->name_id])?>">Публикации (<?=$posts_count?>)</a>
 						</div>
 						<div class="account-sub">
 							<span>Действия:</span>
