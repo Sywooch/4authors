@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 
+use yii\widgets\LinkPager;
 $this->title = 'Публикации '.$id.' - 4authors.ru';
 
 ?>
@@ -33,6 +34,11 @@ $this->title = 'Публикации '.$id.' - 4authors.ru';
                                                         <?php } ?>
                                                     <?php } ?>
 						</ul>
+                                            <?php 
+                                                echo LinkPager::widget([
+                                                    'pagination' => $pages,
+                                                ]);
+                                            ?>
 					</div>
 				</div>
 			</div>

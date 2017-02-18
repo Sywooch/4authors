@@ -12,6 +12,7 @@ use app\models\Users;
 use app\models\Posts;
 use app\models\Articles;
 use app\models\Genres;
+use yii\data\Pagination;
 
 class SiteController extends GrandController
 {
@@ -191,9 +192,15 @@ class SiteController extends GrandController
         
         $user_info = Users::find()->where(['name_id' => $id])->one();
         
-        $posts = Posts::find()->where(['user_id' => $user_info->id])->all();
+        $query = Posts::find()->where(['user_id' => $user_info->id]);
+         
+        /* Pages */
+        $countQuery = clone $query;
+        $count = $countQuery->count();
+        $pages = new Pagination(['totalCount' => $count, 'pageSize' => 10]);
+        $pages->pageSizeParam = false;
         
-        $count = count($posts);
+        $posts = $query->offset($pages->offset)->limit($pages->limit)->all();
         
         return $this->render('posts', [
             'users'          => $this->users, 
@@ -203,6 +210,7 @@ class SiteController extends GrandController
             'id'             => $id,
             'user'           => $user_info,
             'posts'          => $posts,
+            'pages'          => $pages,
             'count'          => $count
         ]);
     }
