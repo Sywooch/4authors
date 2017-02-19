@@ -7,6 +7,8 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use app\components\uscountWidget;
+use app\components\poscountWidget;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -127,11 +129,11 @@ AppAsset::register($this);
 	<div class="high_footer">
 		<div class="container">
 			<div class="col-md-4">
-				<span class="num">7000</span>
+                            <span class="num"><?= uscountWidget::widget()?></span>
 				<span class="desc">Зарегистрированных пользователей</span>
 			</div>
 			<div class="nums col-md-4">
-				<span class="num">7000</span>
+				<span class="num"><?= poscountWidget::widget()?></span>
 				<span class="desc">Опубликованных работ</span>
 			</div>
 			<div class="col-md-4">

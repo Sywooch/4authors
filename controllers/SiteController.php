@@ -214,4 +214,22 @@ class SiteController extends GrandController
             'count'          => $count
         ]);
     }
+    
+    public function actionHandbook()
+    {
+        parent::getLeftSidebar();
+        
+        $id = Yii::$app->request->get('id');
+        
+        $article = Articles::find()->where(['id' => $id])->one();
+        
+        return $this->render('handbook', [
+           'users'          => $this->users, 
+           'ratPosts'       => $this->ratPosts, 
+           'viePosts'       => $this->viePosts, 
+           'articles'       => $this->articles, 
+           'id'             => $id,
+           'article'       => $article
+        ]);
+    }
 }

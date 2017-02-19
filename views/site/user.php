@@ -48,7 +48,7 @@ $this->title = $user->name.' - 4authors.ru';
 						</div>
 						<div class="account-date">
 							<span>Последний раз был на сайте:</span>
-							<span class="accent"><?=Yii::$app->formatter->asDatetime($user->regdate, "php:d.m.Y")?></span>
+							<span class="accent"><?=Yii::$app->formatter->asDatetime($user->last_seen, "php:d.m.Y")?></span>
 						</div>
 						<div class="account-date">
 							<span>Просмотров профиля:</span>

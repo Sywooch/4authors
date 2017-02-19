@@ -53,7 +53,7 @@
         <ul class="art-list">
 
             <?php foreach ($articles as $cur) {?>
-                <li><a href=""><?=$cur['title']?></a></li>
+            <li><a href="<?= \yii\helpers\Url::to(['handbook', 'id' => $cur['id']])?>"><?=$cur['title']?></a></li>
             <?php } ?>
 
         </ul>
