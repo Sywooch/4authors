@@ -21,6 +21,9 @@ $this->title = 'Главная';
                                                     
                                                     <?php foreach ($posts as $value) {?>
 							<li>
+                                                                <div class="genre-img">
+                                                                    <img src="<?=Yii::getAlias('@img')?>/<?=$value['img']?>" alt="<?=$value['name']?>" />
+								</div>
 								<h2><?=$value['name']?></h2>
 								<ul class="product-list">
                                                                     

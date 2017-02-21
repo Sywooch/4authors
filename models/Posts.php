@@ -90,6 +90,7 @@ class Posts extends ActiveRecord {
                 $arrayBig[] = [
                     'gen_id' => $value['id'],
                     'name'   => $value['name'], 
+                    'img'    => $value['img'],
                     'posts'  => $array
                 ];
                 $array = [];
