@@ -98,18 +98,7 @@ AppAsset::register($this);
 			<div class="row">
 				<div class="col-md-12">
 					<div class="menu-container float-l">
-						<nav class="">
-							<div class="menu-mini"></div>
-							<ul class="main_menu">
-								<li><a class="menu_active" href="">Произведения</a></li>
-								<li><a href="">Авторы</a></li>
-								<li><a href="">Конкурсы</a></li>
-								<li><a href="">Справочник</a></li>
-								<!-- If mobile -->
-								<li><a class="mini-support" href="">Поддержка</a></li>
-								<li><a class="mini-search" href="">Поиск</a></li>
-							</ul>
-						</nav>
+						<?= app\components\menuWidget::widget()?>
 					</div>
 					<div class="new-container float-r">
 						<a href="" class="low_h support">Поддержка</a>

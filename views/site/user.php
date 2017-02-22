@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 
+use app\components\leftSideWidget;
+
 $this->title = $user->name.' - 4authors.ru';
 
 ?>
@@ -68,7 +70,13 @@ $this->title = $user->name.' - 4authors.ru';
 			</div>
 		</div>
                 <div class="left-col col-md-4">
-                    <?php require_once 'left.php';?>
+                    <?php 
+                    
+                        leftSideWidget::begin();
+           
+                        leftSideWidget::end();
+                        
+                    ?>
 		</div>
 	</div>	
 </div>

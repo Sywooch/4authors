@@ -66,24 +66,17 @@ class SiteController extends GrandController
     
     public function actionIndex()
     {   
-        parent::getLeftSidebar();
-        
         /* Get Posts */
         $posts = Posts::getPostsByGenre();
         
         return $this->render('index', [
-                'users'    => $this->users, 
-                'ratPosts' => $this->ratPosts, 
-                'viePosts' => $this->viePosts, 
-                'articles' => $this->articles, 
-                'posts'    => $posts
+                'posts'         => $posts,
+                'bla' => $posts
         ]);
     }
     
     public function actionPost()
-    {
-        parent::getLeftSidebar();
-        
+    {   
         $id = Yii::$app->request->get('id');
         $post = Posts::findOne($id);
         $genre = $post->genres;
@@ -98,23 +91,17 @@ class SiteController extends GrandController
         
         return $this->render('post' , [
                 'post'           => $post, 
-                'users'          => $this->users, 
-                'ratPosts'       => $this->ratPosts, 
-                'viePosts'       => $this->viePosts, 
-                'articles'       => $this->articles, 
                 'genre'          => $genre_t,
                 'genre_id'       => $genre_id,
                 'form'           => $form,
                 'user_name'      => $user_name,
                 'user_real_name' => $user_real_name,
-                'n_id'           => $name_id
+                'n_id'           => $name_id,
         ]);
     }
     
     public function actionGenre()
-    {
-        parent::getLeftSidebar();
-        
+    {   
         $id = Yii::$app->request->get('id');
         
         $genre = Genres::findOne($id);
@@ -139,10 +126,6 @@ class SiteController extends GrandController
         }
         
         return $this->render('genre' ,[
-            'users'    => $this->users, 
-            'ratPosts' => $this->ratPosts, 
-            'viePosts' => $this->viePosts, 
-            'articles' => $this->articles,
             'genre'    => $genre,
             'count'    => $count,
             'posts'    => $array
@@ -153,8 +136,6 @@ class SiteController extends GrandController
     {
         $session = Yii::$app->session;
         $session->open();
-        
-        parent::getLeftSidebar();
         
         $name = Yii::$app->request->get('name');
       
@@ -175,19 +156,13 @@ class SiteController extends GrandController
         
 
         return $this->render('user', [
-            'users'          => $this->users, 
-            'ratPosts'       => $this->ratPosts, 
-            'viePosts'       => $this->viePosts, 
-            'articles'       => $this->articles, 
             'user'           => $user,
             'posts_count'    => $posts_count
         ]);
     }
     
     public function actionPosts()
-    {
-        parent::getLeftSidebar();
-        
+    {   
         $id = Yii::$app->request->get('name');
         
         $user_info = Users::find()->where(['name_id' => $id])->one();
@@ -203,10 +178,6 @@ class SiteController extends GrandController
         $posts = $query->offset($pages->offset)->limit($pages->limit)->all();
         
         return $this->render('posts', [
-            'users'          => $this->users, 
-            'ratPosts'       => $this->ratPosts, 
-            'viePosts'       => $this->viePosts, 
-            'articles'       => $this->articles, 
             'id'             => $id,
             'user'           => $user_info,
             'posts'          => $posts,
@@ -216,20 +187,46 @@ class SiteController extends GrandController
     }
     
     public function actionHandbook()
-    {
-        parent::getLeftSidebar();
-        
+    {        
         $id = Yii::$app->request->get('id');
         
         $article = Articles::find()->where(['id' => $id])->one();
         
         return $this->render('handbook', [
-           'users'          => $this->users, 
-           'ratPosts'       => $this->ratPosts, 
-           'viePosts'       => $this->viePosts, 
-           'articles'       => $this->articles, 
            'id'             => $id,
-           'article'       => $article
+           'article'        => $article
+        ]);
+    }
+    
+    public function actionUsers()
+    {
+        $query = Users::find()->orderBy('rating DESC');
+        
+        $countQuery = clone $query;
+        $qcount = $countQuery->count();
+        
+        $pages = new Pagination(['totalCount' => $qcount, 'pageSize' => 10]);
+        $pages->pageSizeParam = false;
+        
+        $count = $query->count();
+        $array = $query->offset($pages->offset)->limit($pages->limit)->all();
+        
+        foreach($array as $cur) {
+            $posts = $cur->getPosts()->count();
+            
+            $users[] = [
+                'posts'     => $posts,
+                'name'      => $cur->name,
+                'real_name' => $cur->real_name,
+                'name_id'   => $cur->name_id,
+                'avatar'    => $cur->avatar,
+            ];
+        }
+        
+        return $this->render('users', [
+            'count' => $count,
+            'users' => $users,
+            'pages' => $pages
         ]);
     }
 }

@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 
+use app\components\leftSideWidget;
+
 $this->title = 'Главная';
 
 ?>
@@ -44,7 +46,7 @@ $this->title = 'Главная';
                                                                         
                                                                         <?php } else { ?>
                                                                         
-                                                                        <span>В катерогии произведений нет</span>
+                                                                        <span>В категории произведений нет</span>
                                                                         
                                                                     <?php   } ?>
                                                                         
@@ -58,7 +60,13 @@ $this->title = 'Главная';
 			</div>
 		</div>
                 <div class="left-col col-md-4">
-                    <?php require_once 'left.php';?>
+                    <?php 
+                    
+                        leftSideWidget::begin();
+           
+                        leftSideWidget::end();
+                        
+                    ?>
 		</div>
 	</div>	
 </div>

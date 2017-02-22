@@ -6,31 +6,31 @@
  * and open the template in the editor.
  */
 
-use yii\widgets\LinkPager;
 use app\components\leftSideWidget;
+use yii\widgets\LinkPager;
 
-$this->title = 'Публикации '.$id.' - 4authors.ru';
+$this->title = 'Авторы - 4authors.ru';
 
 ?>
+
 <div class="main">
 	<div class="container">
 		<div class="main-col col-md-8">
 			<div class="main-content">
-			<h1 class="post-title">Произведения пользователя <?=$user->name?></h1>
-                        <span class="post-genres">Количество публикаций: <?=$count?></span>
+			<h1 class="post-title">Каталог авторов</h1>
+                        <span class="post-genres">Общее количество авторов: <?=$count?></span>
 				<div class="row">
 					<div class="col-md-12">
-						<ul class="post-list">
-                                                    <?php if(!empty($posts)) {?>
-                                                        <?php foreach($posts as $cur) {?>
-							<li class="post-item">
-								<div class="post-info">
-									<span class="post-title-item"><a href="<?=\yii\helpers\Url::to(['post', 'id' => $cur['id']])?>"><?=$cur['title']?></a></span>
-									
-									<span class="rating">Рейтинг: <b><?=$cur['rating']?></b></span>
+						<ul class="user-list">
+                                                    <?php if(!empty($users)) {?>
+                                                        <?php foreach($users as $cur) {?>
+							<li class="user-one">
+								<div class="user-info">
+                                                                    <span class="user-link"><a href="<?= yii\helpers\Url::to(['user', 'name' => $cur['name']])?>">@<?=$cur['name']?></a> <?=$cur['real_name']?></span>
+									<span class="user-other">Публикаций: <?=$cur['posts']?></span><span class="user-other">Комментариев: 0</span>
 								</div>
-								<div class="post-img">
-									<img src="<?=Yii::getAlias('@img')?>/<?=$cur['img']?>" alt="<?=$cur['title']?>" />
+								<div class="user-avatar">
+                                                                    <img src="<?=Yii::getAlias('@avatar')?>/<?=$cur['avatar']?>" alt="<?=$cur['name']?>" />
 								</div>
 							</li>
                                                         <?php } ?>
@@ -64,3 +64,5 @@ $this->title = 'Публикации '.$id.' - 4authors.ru';
 		</div>
 	</div>	
 </div>
+
+

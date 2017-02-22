@@ -45,7 +45,9 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '<action>/<id:\d+>' => 'site/<action>',
-                '<action>/<name>' => 'site/<action>'
+                '<action>/<name>' => 'site/<action>',
+                '<action>' => 'site/<action>',
+                '' => 'site/index'
             ],
         ],
         
