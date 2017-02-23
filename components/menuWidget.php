@@ -19,6 +19,7 @@ class menuWidget extends Widget{
     
     public $index = null;
     public $users = null;
+    public $handbook = null;
     
     public function init()
     {
@@ -27,11 +28,15 @@ class menuWidget extends Widget{
         
         switch ($action) {
             case 'index':
-                    $this->index = 'menu_active';
-            break;
+                $this->index = 'menu_active';
+                break;
             
             case 'users':
                 $this->users = 'menu_active';
+                break;
+            
+            case 'handbook':
+                $this->handbook = 'menu_active';
                 break;
         }
     }
@@ -39,8 +44,9 @@ class menuWidget extends Widget{
     public function run()
     {
         return $this->render('menu', [
-            'index' => $this->index,
-            'users' => $this->users
+            'index'    => $this->index,
+            'users'    => $this->users,
+            'handbook' => $this->handbook
         ]);
     }
     

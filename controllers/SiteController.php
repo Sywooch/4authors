@@ -71,7 +71,6 @@ class SiteController extends GrandController
         
         return $this->render('index', [
                 'posts'         => $posts,
-                'bla' => $posts
         ]);
     }
     
@@ -190,12 +189,34 @@ class SiteController extends GrandController
     {        
         $id = Yii::$app->request->get('id');
         
-        $article = Articles::find()->where(['id' => $id])->one();
+        if($id == null) {
+            
+            $query = Articles::find();
+            $countQuery = clone $query;
+            $count = $query->count();
+            
+            $pages = new Pagination(['totalCount' => $count, 'pageSize' => 10]);
+            $pages->pageSizeParam = false;
+            
+            $posts = $query->offset($pages->offset)->limit($pages->limit)->all();
+            
+            return $this->render('articles', [
+                'count' => $count,
+                'posts' => $posts,
+                'pages' => $pages
+            ]);
+            
+        }
+        else {
         
-        return $this->render('handbook', [
-           'id'             => $id,
-           'article'        => $article
-        ]);
+            $article = Articles::find()->where(['id' => $id])->one();
+
+            return $this->render('handbook', [
+               'id'             => $id,
+               'article'        => $article
+            ]);
+        
+        }
     }
     
     public function actionUsers()
