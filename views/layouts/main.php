@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\components\uscountWidget;
 use app\components\poscountWidget;
+use app\components\searchListWidget;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -55,14 +56,18 @@ AppAsset::register($this);
 						</a>
 					</div>
 					<div class="search-container float-l">
-						<form class="search" action="" method="GET">
-						<input type="text" name="q" placeholder="Автор или название" />
+                                            <form class="search" action="<?= \yii\helpers\Url::to(["search"])?>" method="GET">
+						<input type="text" name="q" placeholder="Автор или название" value="<?=Yii::$app->request->get('q')?>"/>
 						<div class="select_wrap">
-							<select name="cat_list" class="cat_list">
-								<option name="locked" disabled selected>Все разделы</option>
-							</select>
+							<?php 
+                                                            
+                                                        searchListWidget::begin();
+                                                        
+                                                        searchListWidget::end();
+                                                        
+                                                        ?>
 						</div>
-						<input type="submit" name="go_search" value="" />
+						<input type="submit" value="" />
 						</form>
 					</div>
 					<!--<div class="mini-search"></div>-->
@@ -142,9 +147,6 @@ AppAsset::register($this);
 		</div>
 	</div>
 </footer>
-<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-<script type="text/javascript" src="libs/bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -250,4 +250,74 @@ class SiteController extends GrandController
             'pages' => $pages
         ]);
     }
+    
+    public function actionSearch()
+    {
+        $q = Yii::$app->request->get('q');
+        $cat = Yii::$app->request->get('cat');
+        
+        switch ($cat)
+        {
+            case 'posts':
+                $query = Posts::find()->where(['like', 'title', $q]);
+                $posts = $query->all();
+                $count = $query->count();
+                foreach ($posts as $cur) {
+                    $auth = $cur->authors;
+                    $name = $auth->name;
+                    $real = $auth->real_name;
+                    $n_id = $auth->name_id;
+                    $id_u = $auth->id;
+                    $array[] = [
+                        'title'  => $cur['title'],
+                        'id'     => $cur['id'],
+                        'img'    => $cur['img'],
+                        'rating' => $cur['rating'],
+                        'name'   => $name,
+                        'real'   => $real,
+                        'id_u'   => $id_u,
+                        'n_id'   => $n_id
+                    ];
+                }
+                return $this->render('searchPosts', [
+                    'posts' => $array,
+                    'count' => $count
+                ]);
+                break;
+            
+            case 'authors':
+                $query = Users::find()->where(['like', 'real_name', $q]);
+                $users = $query->all();
+                $count = $query->count();
+                
+                foreach($users as $cur) {
+                    $posts = $cur->getPosts()->count();
+
+                    $array[] = [
+                        'posts'     => $posts,
+                        'name'      => $cur->name,
+                        'real_name' => $cur->real_name,
+                        'name_id'   => $cur->name_id,
+                        'avatar'    => $cur->avatar,
+                    ];
+                }
+                return $this->render('searchUsers', [
+                    'users' => $array,
+                    'count' => $count
+                ]);
+                break;
+                
+            case 'handbook':
+                $query = Articles::find()->where(['like', 'title', $q]);
+                $count = $query->count();
+                $posts = $query->all();
+                
+                return $this->render('searchHandbook', [
+                    'posts' => $posts,
+                    'count' => $count
+                ]);
+                break;
+        }
+        
+    }
 }
