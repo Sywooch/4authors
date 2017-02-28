@@ -15,7 +15,7 @@
         <?php 
         foreach ($users as $user) { ?>
             <li>
-                <a href="<?=\yii\helpers\Url::to(['user', 'name' => $user['name_id']])?>"><?=$user['name']?></a>
+                <a href="<?=\yii\helpers\Url::to(['site/user', 'name' => $user['name_id']])?>"><?=$user['name']?></a>
                 <span><?=$user['position']?></span>
             </li>
        <?php  } ?>
@@ -28,7 +28,7 @@
 
             <?php foreach($ratPosts as $cur) { ?>
                 <li>
-                        <a href="<?= \yii\helpers\Url::to(['post', 'id' => $cur['id']])?>"><?=$cur['title']?></a>
+                        <a href="<?= \yii\helpers\Url::to(['site/post', 'id' => $cur['id']])?>"><?=$cur['title']?></a>
                         <span><?=$cur['form']?></span>
                 </li>
             <?php } ?>
@@ -41,7 +41,7 @@
 
             <?php foreach($viePosts as $cur) { ?>
                 <li>
-                        <a href="<?= \yii\helpers\Url::to(['post', 'id' => $cur['id']])?>"><?=$cur['title']?></a>
+                        <a href="<?= \yii\helpers\Url::to(['site/post', 'id' => $cur['id']])?>"><?=$cur['title']?></a>
                         <span><?=$cur['form']?></span>
                 </li>
             <?php } ?>
@@ -53,7 +53,7 @@
         <ul class="art-list">
 
             <?php foreach ($articles as $cur) {?>
-            <li><a href="<?= \yii\helpers\Url::to(['handbook', 'id' => $cur['id']])?>"><?=$cur['title']?></a></li>
+            <li><a href="<?= \yii\helpers\Url::to(['site/handbook', 'id' => $cur['id']])?>"><?=$cur['title']?></a></li>
             <?php } ?>
 
         </ul>

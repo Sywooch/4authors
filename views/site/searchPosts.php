@@ -15,8 +15,10 @@ $this->title = 'Результаты поиска (произведения) - 4
 	<div class="container">
 		<div class="main-col col-md-8">
 			<div class="main-content">
-			<h1 class="post-title">Результаты поиска</h1>
-                        <!--<div class="full_search">Блок с дополнительными параметрами поиска (планируется)</div>-->
+                            <div class="search_engine">
+				<span>Расширенный поиск по параметрам (в разработке)</span>
+                            </div>
+                            <h1 class="post-title">Результаты поиска</h1>
                         <span class="post-genres">Найдено по запросу: <?=$count?></span>
 				<div class="row">
 					<div class="col-md-12">

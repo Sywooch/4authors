@@ -17,6 +17,9 @@ $this->title = 'Результаты поиска (авторы) - 4authors.ru';
 	<div class="container">
 		<div class="main-col col-md-8">
 			<div class="main-content">
+                        <div class="search_engine">
+				<span>Расширенный поиск по параметрам (в разработке)</span>
+			</div>
 			<h1 class="post-title">Результаты поиска</h1>
                         <span class="post-genres">Найдено по запросу: <?=$count?></span>
 				<div class="row">

@@ -56,7 +56,7 @@ AppAsset::register($this);
 						</a>
 					</div>
 					<div class="search-container float-l">
-                                            <form class="search" action="<?= \yii\helpers\Url::to(["search"])?>" method="GET">
+                                            <form class="search" action="<?= \yii\helpers\Url::to(["site/search"])?>" method="GET">
 						<input type="text" name="q" placeholder="Автор или название" value="<?=Yii::$app->request->get('q')?>"/>
 						<div class="select_wrap">
 							<?php 
@@ -77,7 +77,7 @@ AppAsset::register($this);
 						<div class="users_one hidden-xs">
 							<span class="users_hello">Здравствуйте, гость!</span><br/>
 							<span class="users_entry">
-								<a href="">Вход</a> || <a href="">Регистрация</a>
+                                                            <a href="<?= \yii\helpers\Url::to(['person/login'])?>">Вход</a> || <a href="">Регистрация</a>
 							</span>
 						</div>
 						<div class="users_two hidden-xs"></div>

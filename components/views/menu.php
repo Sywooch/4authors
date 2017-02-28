@@ -12,9 +12,9 @@
     <div class="menu-mini"></div>
         <ul class="main_menu">
                 <li><a class="<?=$index?>" href="<?= \yii\helpers\Url::to(['/'])?>">Произведения</a></li>
-                <li><a class="<?=$users?>" href="<?= \yii\helpers\Url::to(['users'])?>">Авторы</a></li>
+                <li><a class="<?=$users?>" href="<?= \yii\helpers\Url::to(['site/users'])?>">Авторы</a></li>
                 <li><a href="">Конкурсы</a></li>
-                <li><a class="<?=$handbook?>" href="<?= \yii\helpers\Url::to(['handbook'])?>">Справочник</a></li>
+                <li><a class="<?=$handbook?>" href="<?= \yii\helpers\Url::to(['site/handbook'])?>">Справочник</a></li>
                 <!-- If mobile -->
                 <li><a class="mini-support" href="">Поддержка</a></li>
                 <li><a class="mini-search" href="">Поиск</a></li>
