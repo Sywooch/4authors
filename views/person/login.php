@@ -37,7 +37,7 @@ $this->title = 'Вход - 4authors.ru';
 							</li>
 							<li class="login-button">
 								<input type="submit" value="Войти" />
-								<a href="">Зарегистрироваться</a>
+                                                                <a href="<?= \yii\helpers\Url::to(['person/register'])?>">Зарегистрироваться</a>
 							</li>
 						</ul>
 					</form>

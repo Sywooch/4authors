@@ -22,4 +22,9 @@ class Users extends ActiveRecord {
     {
         return $this->hasMany(Posts::className(), ['user_id' => 'id']);
     }
+    
+    public function security($password)
+    {
+        return \Yii::$app->getSecurity()->generatePasswordHash($password);
+    }
 }

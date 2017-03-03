@@ -16,6 +16,7 @@ use app\models\Users;
 use app\models\Posts;
 use app\models\Articles;
 use app\models\Genres;
+use app\models\SignUp;
 
 
 /**
@@ -28,6 +29,29 @@ class PersonController extends GrandController{
     public function actionLogin()
     {        
         return $this->render('login', []);
+    }
+    
+    public function actionRegister()
+    {
+        $model = new SignUp();
+        
+        if(isset($_POST['SignUp'])) 
+        {
+            $model->attributes = \Yii::$app->request->post('SignUp');
+            
+            if($model->validate())
+            {
+                $result = $model->SignUp();
+                if($result === true) 
+                {
+                    //return $this->goHome();
+                }
+            }
+        }
+        
+        return $this->render('register', [
+            'model' => $model
+        ]);
     }
     
 }

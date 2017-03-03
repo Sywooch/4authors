@@ -23,6 +23,9 @@ AppAsset::register($this);
 <html lang="<?= Yii::$app->language ?>">
 <!--<![endif]-->
 <head>
+        <!-- because site is testing -->
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <!-- -->
 	<meta charset="<?= Yii::$app->charset ?>">
 	<title><?= Html::encode($this->title) ?></title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -77,11 +80,13 @@ AppAsset::register($this);
 						<div class="users_one hidden-xs">
 							<span class="users_hello">Здравствуйте, гость!</span><br/>
 							<span class="users_entry">
-                                                            <a href="<?= \yii\helpers\Url::to(['person/login'])?>">Вход</a> || <a href="">Регистрация</a>
+                                                            <a href="<?= \yii\helpers\Url::to(['person/login'])?>">Вход</a> || <a href="<?= \yii\helpers\Url::to(['person/register'])?>">Регистрация</a>
 							</span>
 						</div>
 						<div class="users_two hidden-xs"></div>
-						<div class="users-mini hidden-md hidden-lg"></div>
+                                                <div class="users-mini hidden-md hidden-lg">
+                                                    <a href="<?= \yii\helpers\Url::to(['person/login'])?>"></a>
+                                                </div>
 
 						<!--
 							<div class="user_icon"></div>
