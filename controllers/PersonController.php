@@ -68,4 +68,29 @@ class PersonController extends GrandController{
         ]);
     }
     
+    public function actionValidate()
+    {
+        $token = Yii::$app->request->get('token');
+        
+        if($token === null)
+        {
+            return $this->render('validate', ['status' => 'null']);
+        }
+        
+        $model = new SignUp();
+        
+        $result = $model->validateToken($token);
+        
+        $this->layout = 'redirect';
+        
+        if($result === true)
+        {
+            return $this->render('validate', ['status' => true]);
+        } elseif($result === 'not') {
+            return $this->render('validate', ['status' => 'null']);
+        } else {
+            return $this->render('validate', ['status' => false]);
+        }
+    }
+    
 }

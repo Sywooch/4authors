@@ -62,7 +62,7 @@ class SignUp extends Model
         {
             $user = new Users();
             
-            $token = sha1($this->email);
+            $token = sha1($this->email).sha1(uniqid(rand(),20));
             
             $user->name      = $this->name;
             $user->name_id   = str_replace(' ', '', $this->name);
@@ -75,7 +75,7 @@ class SignUp extends Model
             
             if($result === true)
             {
-                return $this->MailTo($token, $this->email);
+                return $this->MailTo($token, $this->email, $this->realName);
             }
         }
         else 
@@ -84,12 +84,12 @@ class SignUp extends Model
         }
     }
     
-    public function MailTo($token, $email)
+    public function MailTo($token, $email, $name)
     {
         if($token !== null AND $email !== null)
         {
             $body = '<h3>Добро пожаловать на сайт 4authors.ru!</h3>'
-                    . '<p>Для продолжения регистрации перейдите по <a href="4authors.ru/activate/'.$token.'">ссылке</a></p>';
+                    . '<p>Здравствуйте, '.$name.'! Для продолжения регистрации перейдите по <a href="http://4authors.loc'.\yii\helpers\Url::to(['validate', 'token' => $token]).'">ссылке</a></p>';
             
             Yii::$app->mailer->compose()
             ->setFrom('from@domain.com')
@@ -99,6 +99,24 @@ class SignUp extends Model
             ->send();
         
             return true;
+        }
+        
+        return false;
+    }
+    
+    public function validateToken($token)
+    {
+        $user = Users::find()->where(['token' => $token])->one();
+        
+        if(!$user)
+        {
+            return 'not';
+        }
+        
+        if($user->status === 0) 
+        {
+            $user->status = 1;
+            return $user->save();
         }
         
         return false;

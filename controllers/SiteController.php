@@ -221,7 +221,7 @@ class SiteController extends GrandController
     
     public function actionUsers()
     {
-        $query = Users::find()->orderBy('rating DESC');
+        $query = Users::find()->where(['status' => 1])->orderBy('rating DESC');
         
         $countQuery = clone $query;
         $qcount = $countQuery->count();
