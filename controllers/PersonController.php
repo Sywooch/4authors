@@ -44,8 +44,22 @@ class PersonController extends GrandController{
                 $result = $model->SignUp();
                 if($result === true) 
                 {
-                    //return $this->goHome();
+                    return $this->render('register', [
+                        'completed' => true,
+                        'model'     => $model
+                    ]);
                 }
+                elseif($result === 'pswrd')
+                {
+                    return $this->render('register', [
+                        'status' => 'pswrd',
+                        'model'  => $model
+                    ]);
+                }
+                return $this->render('register', [
+                    'status' => false,
+                    'model'  => $model
+                ]);
             }
         }
         

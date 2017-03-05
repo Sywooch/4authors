@@ -9,6 +9,7 @@
 namespace app\models;
 use yii\base\Model;
 use app\models\Users;
+use Yii;
 
 /**
  * Description of singUp
@@ -19,7 +20,7 @@ class SignUp extends Model
 {
     
     public $realName;
-    public $login;
+    public $name;
     public $email;
     public $password;
     public $rePassword;
@@ -28,14 +29,30 @@ class SignUp extends Model
     {
     
         return [
+            [['realName', 'name', 'email', 'password', 'rePassword'], 'required', 'message' => 'Все поля должны быть заполнены.'],
             ['realName', 'string', 'min' => 2, 'max' => 255],
-            ['login', 'string', 'min' => 2, 'max' => 255],
-            ['email', 'email'],
-            ['email', 'unique', 'targetClass' => 'app\models\Users'],
+            ['name', 'unique', 'targetClass' => 'app\models\Users', 'message' => 'Такой логин уже существует.'],
+            ['name', 'string', 'min' => 2, 'max' => 32],
+            ['name', 'loginValidator'],
+            ['email', 'unique', 'targetClass' => 'app\models\Users', 'message' => 'Такой E-Mail уже существует.'],
+            ['email', 'email', 'message' => 'E-Mail введён неверно.'],
             ['password', 'string', 'min' => 2, 'max' => 30],
             ['rePassword', 'string', 'min' => 2, 'max' => 30]
         ];
         
+    }
+    
+    public function loginValidator($attribute)
+    {
+        $trimmed = str_replace(' ', '', $this->name);
+        if($trimmed !== $this->name)
+        {
+            $this->addError($attribute, 'Логин не должен содержать пробелов');
+        }
+        if(!ctype_alnum($this->name)) 
+        {
+            $this->addError($attribute, 'Логин должен состоять из латинских букв и цифр');
+        }
     }
     
     public function SignUp()
@@ -45,17 +62,46 @@ class SignUp extends Model
         {
             $user = new Users();
             
-            $user->name      = $this->login;
+            $token = sha1($this->email);
+            
+            $user->name      = $this->name;
+            $user->name_id   = str_replace(' ', '', $this->name);
             $user->email     = $this->email;
             $user->real_name = $this->realName;
             $user->password  = $user->security($this->password);
+            $user->token     = $token;
             
-            return $user->save();
+            $result = $user->save();
+            
+            if($result === true)
+            {
+                return $this->MailTo($token, $this->email);
+            }
         }
         else 
         {
             return 'pswrd';
         }
+    }
+    
+    public function MailTo($token, $email)
+    {
+        if($token !== null AND $email !== null)
+        {
+            $body = '<h3>Добро пожаловать на сайт 4authors.ru!</h3>'
+                    . '<p>Для продолжения регистрации перейдите по <a href="4authors.ru/activate/'.$token.'">ссылке</a></p>';
+            
+            Yii::$app->mailer->compose()
+            ->setFrom('from@domain.com')
+            ->setTo($email)
+            ->setSubject('Добро пожаловать на 4authors.ru')
+            ->setHtmlBody($body)
+            ->send();
+        
+            return true;
+        }
+        
+        return false;
     }
     
 }
