@@ -42,7 +42,7 @@ class SignUp extends Model
         
     }
     
-    public function loginValidator($attribute)
+    public function loginValidator($attribute, $params)
     {
         $trimmed = str_replace(' ', '', $this->name);
         if($trimmed !== $this->name)

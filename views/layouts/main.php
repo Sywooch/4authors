@@ -78,10 +78,17 @@ AppAsset::register($this);
 					<div class="users-container float-r">
 						<div class="users">
 						<div class="users_one hidden-xs">
-							<span class="users_hello">Здравствуйте, гость!</span><br/>
+                                                    <?php if(!Yii::$app->user->isGuest) { ?>
+                                                        <span class="users_hello"><?=Yii::$app->user->identity->real_name?></span><br/>
+                                                        <span class="users_entry">
+                                                            <a href="<?= \yii\helpers\Url::to(['person/cabinet'])?>">Личный кабинет</a> || <a href="<?= \yii\helpers\Url::to(['person/logout'])?>">Выход</a>
+							</span>
+                                                    <?php } else { ?>
+                                                        <span class="users_hello">Здравствуйте, гость!</span><br/>
 							<span class="users_entry">
                                                             <a href="<?= \yii\helpers\Url::to(['person/login'])?>">Вход</a> || <a href="<?= \yii\helpers\Url::to(['person/register'])?>">Регистрация</a>
 							</span>
+                                                    <?php } ?>
 						</div>
 						<div class="users_two hidden-xs"></div>
                                                 <div class="users-mini hidden-md hidden-lg">

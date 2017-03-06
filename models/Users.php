@@ -7,9 +7,11 @@
  */
 
 namespace app\models;
+use Yii;
 use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-class Users extends ActiveRecord {
+class Users extends ActiveRecord implements IdentityInterface {
     public $us_array;
     
     public function GetUsers() 
@@ -27,4 +29,37 @@ class Users extends ActiveRecord {
     {
         return \Yii::$app->getSecurity()->generatePasswordHash($password);
     }
+    
+    public function validatePassword($password)
+    {
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+    
+    //Interface
+    
+    public static function findIdentity($id) 
+    {
+        return self::findOne($id);
+    }
+    
+    public function getId() 
+    {
+        return $this->id;
+    }
+    
+    public function validateAuthKey($authKey) 
+    {
+        
+    }
+    
+    public static function findIdentityByAccessToken($token, $type = null) 
+    {
+       
+    }
+    
+    public function getAuthKey() 
+    {
+        
+    }
+    
 }

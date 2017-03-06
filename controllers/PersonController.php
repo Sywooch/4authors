@@ -17,6 +17,7 @@ use app\models\Posts;
 use app\models\Articles;
 use app\models\Genres;
 use app\models\SignUp;
+use app\models\Login;
 
 
 /**
@@ -28,14 +29,53 @@ class PersonController extends GrandController{
       
     public function actionLogin()
     {        
-        return $this->render('login', []);
+        if(!Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+        
+        $model = new Login();
+        
+        if(Yii::$app->request->post('Login')) 
+        {
+            
+            $model->attributes = Yii::$app->request->post('Login');
+            
+            if($model->validate())
+            {
+                Yii::$app->user->login($model->getUser());
+                $this->layout = 'redirect';
+                return $this->render('redirect-login',['status' => true]);
+            }
+            
+        }
+        
+        return $this->render('login', [
+            'model' => $model
+        ]);
+    }
+    
+    public function actionLogout()
+    {
+        if(!Yii::$app->user->isGuest)
+        {
+            Yii::$app->user->logout();
+            return $this->goHome();
+        }
+        
+        return $this->goHome();
     }
     
     public function actionRegister()
     {
+        if(!Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+        
         $model = new SignUp();
         
-        if(isset($_POST['SignUp'])) 
+        if(Yii::$app->request->post('SignUp')) 
         {
             $model->attributes = \Yii::$app->request->post('SignUp');
             
@@ -70,6 +110,8 @@ class PersonController extends GrandController{
     
     public function actionValidate()
     {
+        $this->layout = 'redirect';
+        
         $token = Yii::$app->request->get('token');
         
         if($token === null)
@@ -81,8 +123,6 @@ class PersonController extends GrandController{
         
         $result = $model->validateToken($token);
         
-        $this->layout = 'redirect';
-        
         if($result === true)
         {
             return $this->render('validate', ['status' => true]);
@@ -91,6 +131,17 @@ class PersonController extends GrandController{
         } else {
             return $this->render('validate', ['status' => false]);
         }
+    }
+    
+    public function actionCabinet()
+    {
+        if(Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+        
+        $this->layout = 'grayList';
+        return $this->render('cabinet');
     }
     
 }

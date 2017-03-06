@@ -16,7 +16,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Users',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -28,6 +28,16 @@ $config = [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+            /*
+            'transport' => [
+                'class'      => 'Swift_SmtpTransport',
+                'host'       => 'smtp.mail.ru',
+                'username'   => 'usy.kota@bk.ru',
+                'password'   => 'usukotu',
+                'port'       => '465',
+                'encryption' => 'ssl',
+            ],
+             */
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -56,7 +66,8 @@ $config = [
     'params' => $params,
     'aliases' => [
         '@img' => '/img_storage',
-        '@avatar' => '/img_storage/avatar'
+        '@avatar' => '/img_storage/avatar',
+        '@sitename' => '4authors.ru',
     ]
 ];
 
