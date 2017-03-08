@@ -66,7 +66,7 @@ class SignUp extends Model
             
             $user->name      = $this->name;
             $user->name_id   = str_replace(' ', '', $this->name);
-            $user->email     = $this->email;
+            $user->email     = strtolower($this->email);
             $user->real_name = $this->realName;
             $user->password  = $user->security($this->password);
             $user->token     = $token;
@@ -75,7 +75,7 @@ class SignUp extends Model
             
             if($result === true)
             {
-                return $this->MailTo($token, $this->email, $this->realName);
+                return $this->MailTo($token, strtolower($this->email), $this->realName);
             }
         }
         else 
@@ -88,11 +88,11 @@ class SignUp extends Model
     {
         if($token !== null AND $email !== null)
         {
-            $body = '<h3>Добро пожаловать на сайт 4authors.ru!</h3>'
-                    . '<p>Здравствуйте, '.$name.'! Для продолжения регистрации перейдите по <a href="http://4authors.loc'.\yii\helpers\Url::to(['validate', 'token' => $token]).'">ссылке</a></p>';
+            $body = '<h3>Добро пожаловать на сайт '.Yii::getAlias('@sitename').'!</h3>'
+                    . '<p>Здравствуйте, '.$name.'! Для продолжения регистрации перейдите по <a href="http://'.Yii::getAlias('@sitename').'/'.\yii\helpers\Url::to(['validate', 'token' => $token]).'">ссылке</a></p>';
             
             Yii::$app->mailer->compose()
-            ->setFrom('from@domain.com')
+            ->setFrom(Yii::getAlias('@emailfrom'))
             ->setTo($email)
             ->setSubject('Добро пожаловать на 4authors.ru')
             ->setHtmlBody($body)
@@ -116,6 +116,7 @@ class SignUp extends Model
         if($user->status === 0) 
         {
             $user->status = 1;
+            $user->token = NULL;
             return $user->save();
         }
         

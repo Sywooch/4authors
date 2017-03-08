@@ -68,6 +68,7 @@ $config = [
         '@img' => '/img_storage',
         '@avatar' => '/img_storage/avatar',
         '@sitename' => '4authors.ru',
+        '@emailfrom' => 'usy.kota@bk.ru'
     ]
 ];
 

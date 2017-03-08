@@ -20,7 +20,8 @@ $this->title = $user->name.' - 4authors.ru';
 				<div class="row account">
 					<div class="account-main col-md-6 col-sm-6 col-xs-7">
 						<div class="account-avatar">
-							<img src="<?=Yii::getAlias('@avatar')?>/<?=$user->avatar?>" alt="<?=$user->name?>" />
+                                                    <?php $avatar = $user->avatar !== null ? $user->avatar : 'person.png' ?>
+							<img src="<?=Yii::getAlias('@avatar')?>/<?=$avatar?>" alt="<?=$user->name?>" />
 						</div>
 						<div class="account-name">
 							<span>Имя:</span>

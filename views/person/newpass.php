@@ -9,7 +9,7 @@
 use app\components\leftSideWidget;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Вход - 4authors.ru';
+$this->title = 'Сброс пароля - '.Yii::getAlias('@sitename');
 
 ?>
 
@@ -18,32 +18,26 @@ $this->title = 'Вход - 4authors.ru';
 		<div class="main-col col-md-8">
 			<div class="main-content">
                             <div class="login-title">
-					<span>Войти в аккаунт</span>
+					<span>Новый пароль (не работает)</span>
 				</div>
+                            
 				<div class="login-body">
-                                    <?php $form = ActiveForm::begin(['class' => 'login-form']) ?>
+                                    <?php $form = ActiveForm::begin(['class' => 'restore-form']) ?>
                                         <ul class="form-list">
                                             <li>
-                                                <?= $form->field($model, 'email')->textInput()->label('Электронная почта')?>
+                                                <?= $form->field($model, 'password')->passwordInput(['disabled' => true])->label('Новый пароль')?>
                                             </li>
                                             <li>
-                                                <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
-                                                    <a class="login-password-forgot" href="<?= \yii\helpers\Url::to(['person/restore'])?>">Забыли пароль?</a>
-                                            </li>
-                                            <li class="login-cookie">
-                                                    <input id="cookie-login" type="checkbox" value="" />
-                                                    <label for="cookie-login">Оставаться в сети (x)</label>
+                                                <?= $form->field($model, 'rePassword')->passwordInput(['disabled' => true])->label('Повторите пароль')?>
                                             </li>
                                             <li class="login-button">
-                                                <?= \yii\helpers\Html::submitButton('Войти')?>
+                                                <?= \yii\helpers\Html::submitButton('Далее')?>
                                                     <a href="<?= \yii\helpers\Url::to(['person/register'])?>">Зарегистрироваться</a>
                                             </li>
                                         </ul>
                                     <?php ActiveForm::end() ?>
-				</div>
-				<div class="login-social">
-					<span>Войти через социальные сети</span>
-				</div>
+                                </div>
+                            
 			</div>
 		</div>
                 <div class="left-col col-md-4">

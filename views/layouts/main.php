@@ -77,23 +77,32 @@ AppAsset::register($this);
 						<div class="search-mini "></div>
 					<div class="users-container float-r">
 						<div class="users">
-						<div class="users_one hidden-xs">
+						
                                                     <?php if(!Yii::$app->user->isGuest) { ?>
+                                                    <div class="users_one hidden-xs">
                                                         <span class="users_hello"><?=Yii::$app->user->identity->real_name?></span><br/>
                                                         <span class="users_entry">
                                                             <a href="<?= \yii\helpers\Url::to(['person/cabinet'])?>">Личный кабинет</a> || <a href="<?= \yii\helpers\Url::to(['person/logout'])?>">Выход</a>
 							</span>
+                                                    </div>
+                                                    <div class="users_two hidden-xs"></div>
+                                                    <div class="users-mini hidden-md hidden-lg">
+                                                        <a href="<?= \yii\helpers\Url::to(['person/cabinet'])?>"></a>
+                                                    </div>
                                                     <?php } else { ?>
+                                                    <div class="users_one hidden-xs">
                                                         <span class="users_hello">Здравствуйте, гость!</span><br/>
 							<span class="users_entry">
                                                             <a href="<?= \yii\helpers\Url::to(['person/login'])?>">Вход</a> || <a href="<?= \yii\helpers\Url::to(['person/register'])?>">Регистрация</a>
 							</span>
+                                                    </div>
+                                                    <div class="users_two hidden-xs"></div>
+                                                    <div class="users-mini hidden-md hidden-lg">
+                                                        <a href="<?= \yii\helpers\Url::to(['person/login'])?>"></a>
+                                                    </div>
                                                     <?php } ?>
-						</div>
-						<div class="users_two hidden-xs"></div>
-                                                <div class="users-mini hidden-md hidden-lg">
-                                                    <a href="<?= \yii\helpers\Url::to(['person/login'])?>"></a>
-                                                </div>
+						
+						
 
 						<!--
 							<div class="user_icon"></div>

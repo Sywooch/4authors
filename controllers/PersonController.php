@@ -18,6 +18,8 @@ use app\models\Articles;
 use app\models\Genres;
 use app\models\SignUp;
 use app\models\Login;
+use app\models\Restore;
+use app\models\SetPass;
 
 
 /**
@@ -141,7 +143,57 @@ class PersonController extends GrandController{
         }
         
         $this->layout = 'grayList';
-        return $this->render('cabinet');
+        if(Yii::$app->user->identity->status === 0) {
+            return $this->render('blocked');
+        }
+        return $this->render('cabinet', ['blocked' => $blocked]);
+    }
+    
+    public function actionRestore()
+    {
+        if(!Yii::$app->user->isGuest)
+        {
+            return $this->goHome();
+        }
+        
+        $model = new Restore();
+        
+        if(Yii::$app->request->post('Restore'))
+        {
+            
+            $model->attributes = Yii::$app->request->post('Restore');
+            
+            if($model->validate())
+            {
+                
+                if($model->Restore())
+                {   
+                    return $this->render('restore', ['completed' => true]);
+                }
+                
+            }
+        }
+        
+        if(Yii::$app->request->get('token'))
+        {
+            $token = Yii::$app->request->get('token');
+            
+            if($model->validateToken($token))
+            {
+                // Я сделал это для того, чтобы отделить общую форму от этой
+                $setpass = new SetPass();
+                // Другой роли у этой модели нет
+                
+                if(Yii::$app->request->post('SetPass'))
+                {
+                    return $this->goHome();
+                }
+                
+                return $this->render('newpass', ['model' => $setpass]);
+            }
+        }
+        
+        return $this->render('restore', ['model' => $model]);
     }
     
 }

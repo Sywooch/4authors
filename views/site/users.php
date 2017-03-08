@@ -30,7 +30,8 @@ $this->title = 'Авторы - 4authors.ru';
 									<span class="user-other">Публикаций: <?=$cur['posts']?></span><span class="user-other">Комментариев: 0</span>
 								</div>
 								<div class="user-avatar">
-                                                                    <img src="<?=Yii::getAlias('@avatar')?>/<?=$cur['avatar']?>" alt="<?=$cur['name']?>" />
+                                                                    <?php $avatar = $cur['avatar'] !== null ? $cur['avatar'] : 'person.png' ?>
+                                                                    <img src="<?=Yii::getAlias('@avatar')?>/<?=$avatar?>" alt="<?=$cur['name']?>" />
 								</div>
 							</li>
                                                         <?php } ?>
