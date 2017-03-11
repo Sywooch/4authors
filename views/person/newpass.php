@@ -18,17 +18,19 @@ $this->title = 'Сброс пароля - '.Yii::getAlias('@sitename');
 		<div class="main-col col-md-8">
 			<div class="main-content">
                             <div class="login-title">
-					<span>Новый пароль (не работает)</span>
+					<span>Новый пароль</span>
 				</div>
-                            
+                                <?php if($status) { ?>
+                                    <div class="success">Пароль успешно изменен. Теперь вы можете войти.</div>
+                                <?php } else { ?>
 				<div class="login-body">
                                     <?php $form = ActiveForm::begin(['class' => 'restore-form']) ?>
                                         <ul class="form-list">
                                             <li>
-                                                <?= $form->field($model, 'password')->passwordInput(['disabled' => true])->label('Новый пароль')?>
+                                                <?= $form->field($model, 'password')->passwordInput()->label('Новый пароль')?>
                                             </li>
                                             <li>
-                                                <?= $form->field($model, 'rePassword')->passwordInput(['disabled' => true])->label('Повторите пароль')?>
+                                                <?= $form->field($model, 'rePassword')->passwordInput()->label('Повторите пароль')?>
                                             </li>
                                             <li class="login-button">
                                                 <?= \yii\helpers\Html::submitButton('Далее')?>
@@ -37,6 +39,7 @@ $this->title = 'Сброс пароля - '.Yii::getAlias('@sitename');
                                         </ul>
                                     <?php ActiveForm::end() ?>
                                 </div>
+                                <?php } ?>
                             
 			</div>
 		</div>

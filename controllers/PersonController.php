@@ -158,6 +158,7 @@ class PersonController extends GrandController{
         
         $model = new Restore();
         
+        //Если была отправлена форма с восстановлением пароля
         if(Yii::$app->request->post('Restore'))
         {
             
@@ -174,25 +175,37 @@ class PersonController extends GrandController{
             }
         }
         
+        //Запрос пришел по ссылке из E-Mail
         if(Yii::$app->request->get('token'))
         {
             $token = Yii::$app->request->get('token');
             
             if($model->validateToken($token))
             {
-                // Я сделал это для того, чтобы отделить общую форму от этой
+                
                 $setpass = new SetPass();
-                // Другой роли у этой модели нет
                 
                 if(Yii::$app->request->post('SetPass'))
                 {
-                    return $this->goHome();
+                    $setpass->attributes = Yii::$app->request->post('SetPass');
+                    
+                    if($setpass->validate())
+                    {
+                       if($setpass->Restore($token))
+                       {
+                           return $this->render('newpass', [
+                               'status' => true,
+                               'model'  => $setpass
+                            ]);
+                       }
+                    }
                 }
                 
                 return $this->render('newpass', ['model' => $setpass]);
             }
         }
         
+        //Штатная загрузка страницы
         return $this->render('restore', ['model' => $model]);
     }
     

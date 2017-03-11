@@ -20,8 +20,10 @@ $this->title = 'Сброс пароля - '.Yii::getAlias('@sitename');
                             <div class="login-title">
 					<span>Восстановить пароль</span>
 				</div>
-                            <?php if($completed) { ?>
+                            <?php if($completed === true) { ?>
                                 <div class="success">Дальнейшие инструкции высланы на Ваш почтовый ящик.</div>
+                            <?php } elseif($completed === 'newpass') { ?>
+                                <div class="success">Пароль успешно изменен. Теперь вы можете войти.</div>
                             <?php } else { ?>
 				<div class="login-body">
                                     <?php $form = ActiveForm::begin(['class' => 'restore-form']) ?>
