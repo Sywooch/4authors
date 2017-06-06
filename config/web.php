@@ -32,8 +32,8 @@ $config = [
             'transport' => [
                 'class'      => 'Swift_SmtpTransport',
                 'host'       => 'smtp.mail.ru',
-                'username'   => 'usy.kota@bk.ru',
-                'password'   => 'usukotu',
+                'username'   => 'robot@4authors.ru',
+                'password'   => 'darthdaraa330300',
                 'port'       => '465',
                 'encryption' => 'ssl',
             ],
@@ -68,7 +68,7 @@ $config = [
         '@img' => '/img_storage',
         '@avatar' => '/img_storage/avatar',
         '@sitename' => '4authors.ru',
-        '@emailfrom' => 'usy.kota@bk.ru'
+        '@emailfrom' => 'robot@4authors.ru'
     ]
 ];
 

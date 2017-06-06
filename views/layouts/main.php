@@ -36,6 +36,7 @@ AppAsset::register($this);
             'type' => 'image/x-icon',
             'href' => '../../web/common/favicon.png',
         ]);?>
+        <meta name="mailru-domain" content="QPAvKejENojrW1Kw" />
 	<?php $this->head() ?>
 </head>
 <body>
@@ -55,7 +56,7 @@ AppAsset::register($this);
 					<div class="logo-container float-l">
 						<a href="/" class="logo">
 							<span class="logo-span"></span>
-							<span class="logo-text-span">Лучшие писатели рунета!</span>
+							<span class="logo-text-span">Проект закрыт</span>
 						</a>
 					</div>
 					<div class="search-container float-l">
